@@ -13,5 +13,4 @@ public class GlobalExceptionHandler {
         log.error("'{}':'{}'", e.getErrorCode(), e.getErrorCode().getMessage());
         return new ErrorResponse(e.getErrorCode(), e.getStatus(), e.getMessage());
     }
-
 }
