@@ -1,7 +1,6 @@
 package com.checkyou.commute.service;
 
 import com.checkyou.auth.entity.Member;
-import com.checkyou.auth.repository.MemberRepository;
 import com.checkyou.commute.dto.CheckIn.Request;
 import com.checkyou.commute.entity.Commute;
 import com.checkyou.commute.repository.CommuteRepository;
@@ -19,24 +18,13 @@ public class CommuteService {
 
     private static final LocalDateTime TARDINESS =
             LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 1));
-    private final MemberRepository memberRepository;
     private final CommuteRepository commuteRepository;
 
-    public Commute checkIn(Request request) {
-        // 사번이랑 출근시간
-        boolean tardiness = false;
+    public Commute checkIn(Member member, Request request) {
 
-        // 1. 사번으로 멤버를 불러온다. 해당 멤버가 없으면 오류
-        Member member =
-                memberRepository
-                        .findByCode(request.getCode())
-                        .orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_MEMBER));
+        // 1. 출근시간이 지각인지 확인
+        boolean tardiness = TARDINESS.isBefore(request.getStartTime());
 
-        // 3. 출근시간이 지각인지 확인
-
-        if (TARDINESS.isBefore(request.getStartTime())) {
-            tardiness = true;
-        }
         // 만약에 이미 오늘 출근했으면 오류 (이미 출근 함)
 
         LocalDateTime now = LocalDateTime.now();
