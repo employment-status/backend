@@ -3,22 +3,19 @@ package com.checkyou.auth.entity;
 import com.checkyou.auth.type.Gender;
 import com.checkyou.auth.type.Role;
 import com.checkyou.global.entity.BaseEntity;
+import com.checkyou.vacation.entity.ConfirmVacation;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -61,4 +58,10 @@ public class Member extends BaseEntity {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate leaveDate;
+
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//    @JsonManagedReference
+    private List<ConfirmVacation> confirmVacations;
+
 }

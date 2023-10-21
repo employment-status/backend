@@ -13,7 +13,10 @@ public enum ErrorCode {
     FAILED_LOGIN("사번 혹은 비밀번호를 확인해주세요.", HttpStatus.BAD_REQUEST),
     INTERNAL_SERVER_ERROR("알 수 없는 에러입니다.", HttpStatus.INTERNAL_SERVER_ERROR),
     ALREADY_SIGNUP("이미 가입된 사번입니다.", HttpStatus.BAD_REQUEST),
-    ALREADY_CHECKED_IN("이미 출근 했습니다.", HttpStatus.BAD_REQUEST);
+    ALREADY_CHECKED_IN("이미 출근 했습니다.", HttpStatus.BAD_REQUEST),
+    IMPOSSIBLE_TO_APPLY_DATE("휴가 신청 날짜를 확인해주세요", HttpStatus.BAD_REQUEST),
+
+    NOT_ENOUGH_VACATION_DAYS("휴가 일수가 충분하지 않습니다", HttpStatus.BAD_REQUEST);
 
     private final String message;
     private final HttpStatus status;
