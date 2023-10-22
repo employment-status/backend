@@ -3,19 +3,15 @@ package com.checkyou.auth.entity;
 import com.checkyou.auth.type.Gender;
 import com.checkyou.auth.type.Role;
 import com.checkyou.global.entity.BaseEntity;
-import com.checkyou.vacation.entity.ConfirmVacation;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -58,10 +54,4 @@ public class Member extends BaseEntity {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate leaveDate;
-
-
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-//    @JsonManagedReference
-    private List<ConfirmVacation> confirmVacations;
-
 }

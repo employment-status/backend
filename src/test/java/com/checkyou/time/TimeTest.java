@@ -1,11 +1,9 @@
 package com.checkyou.time;
 
+import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 public class TimeTest {
 
@@ -20,12 +18,11 @@ public class TimeTest {
     LocalDate endDate = startDate.plusDays(wholeDays); // *휴가 종료일 -> 2023.10.12
 
     // 남은 휴가
-    float restLeave = Total_Leave_Date-applyDateF;
+    float restLeave = Total_Leave_Date - applyDateF;
+
     @Test
     public void myTest() {
         Logger logger = LoggerFactory.getLogger(getClass());
         logger.info(String.valueOf(applyDateF));
-
     }
-
 }

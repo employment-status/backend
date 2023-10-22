@@ -22,7 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 memberRepository
                         .findByCode(code)
                         .orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_MEMBER));
-
         return new CustomUserDetails(member);
     }
 }
