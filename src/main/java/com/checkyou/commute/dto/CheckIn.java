@@ -15,7 +15,10 @@ public class CheckIn {
     @Builder
     public static class Request {
 
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(
+                shape = JsonFormat.Shape.STRING,
+                pattern = "yyyy-MM-dd HH:mm",
+                timezone = "Asia/Seoul")
         private LocalDateTime startTime;
     }
 }
