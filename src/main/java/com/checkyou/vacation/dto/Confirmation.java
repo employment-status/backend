@@ -1,22 +1,12 @@
 package com.checkyou.vacation.dto;
 
+import com.checkyou.vacation.entity.ConfirmVacation;
 import com.checkyou.vacation.type.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 public class Confirmation {
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class Request {
-        //        @NotBlank(message = "휴가신청 날짜를 선택하세요")
-        private int month;
-    }
 
     @Getter
     @NoArgsConstructor
@@ -30,5 +20,14 @@ public class Confirmation {
         private LocalDate endDate;
 
         private Status status;
+
+        public static Response from(ConfirmVacation confirmVacation) {
+
+            return Response.builder()
+                    .status(confirmVacation.getStatus())
+                    .startDate(confirmVacation.getStartDate())
+                    .endDate(confirmVacation.getEndDate())
+                    .build();
+        }
     }
 }
