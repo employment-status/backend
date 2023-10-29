@@ -12,6 +12,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.YearMonth;
+import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -68,6 +70,23 @@ public class CommuteService {
         calculateOverTime(endTime, commute);
 
         commute.setEndTime(endTime);
+    }
+
+    @Transactional
+    public List<Commute> getCommuteList(Member member, int year, Integer month) {
+
+        LocalDateTime startOfMonth = LocalDateTime.of(LocalDate.of(year, 1, 1), LocalTime.MIN);
+        LocalDateTime endOfMonth =
+                LocalDateTime.of(YearMonth.of(year, 12).atEndOfMonth(), LocalTime.MAX);
+
+        if (month != null) {
+            startOfMonth = LocalDateTime.of(LocalDate.of(year, month, 1), LocalTime.MIN);
+            endOfMonth = startOfMonth.plusMonths(1).minusNanos(1);
+        }
+
+        // 해당 멤버의 출근 기록을 조회
+        return commuteRepository.findALLByMemberAndStartTimeBetweenOrderByStartTimeAsc(
+                member, startOfMonth, endOfMonth);
     }
 
     private void validateStartTime(LocalDateTime startTime) {
