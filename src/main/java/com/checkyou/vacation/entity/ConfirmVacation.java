@@ -1,6 +1,7 @@
 package com.checkyou.vacation.entity;
 
 import com.checkyou.auth.entity.Member;
+import com.checkyou.global.entity.BaseEntity;
 import com.checkyou.vacation.type.Status;
 import com.checkyou.vacation.type.VacationType;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-public class ConfirmVacation {
+public class ConfirmVacation extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
